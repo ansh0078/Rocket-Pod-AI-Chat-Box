@@ -24,33 +24,23 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case ChatSuccessState:
-              List<ChatMessageModel> message =
-                  (state as ChatSuccessState).messages;
+              List<ChatMessageModel> message = (state as ChatSuccessState).messages;
               return Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        opacity: 0.5,
-                        image: AssetImage("assets/image/rocket_background.jpg"),
-                        fit: BoxFit.cover)),
+                decoration: const BoxDecoration(image: DecorationImage(opacity: 0.5, image: AssetImage("assets/image/rocket_background.jpg"), fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       height: 25,
-                      margin: EdgeInsets.only(top: 40),
+                      margin: const EdgeInsets.only(top: 40),
                       child: const Row(
-                        // crossAxisAlignment: CrossAxisAlignment.end,
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Rocket Pod',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Sixtyfour',
-                                fontSize: 25),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Sixtyfour', fontSize: 25),
                           )
                         ],
                       ),
@@ -60,34 +50,25 @@ class _HomePageState extends State<HomePage> {
                             itemCount: message.length,
                             itemBuilder: (context, index) {
                               return Container(
-                                  margin: const EdgeInsets.only(
-                                      bottom: 12, left: 16, right: 16),
+                                  margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
                                     color: Colors.amber.withOpacity(0.1),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        message[index].role == "user"
-                                            ? "User"
-                                            : "Space Pod",
-                                        style: TextStyle(
-                                            color: message[index].role == "user"
-                                                ? Colors.amber
-                                                : Colors.purple.shade200,
-                                            fontSize: 25),
+                                        message[index].role == "user" ? "User" : "Rocket Pod",
+                                        style: TextStyle(color: message[index].role == "user" ? Colors.amber : Colors.purple.shade200, fontSize: 25),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 12,
                                       ),
                                       Text(
                                         message[index].parts.first.text,
-                                        style: TextStyle(
-                                            height: 1.2, fontSize: 25),
+                                        style: const TextStyle(height: 1.2, fontSize: 25),
                                       ),
                                     ],
                                   ));
@@ -95,50 +76,38 @@ class _HomePageState extends State<HomePage> {
                     if (chatBloc.generating)
                       Row(
                         children: [
-                          Container(
-                              height: 100,
-                              width: 100,
-                              child: Lottie.asset(
-                                  'assets/animination/Loading_animation.json')),
+                          SizedBox(height: 100, width: 100, child: Lottie.asset('assets/animination/Loading_animation.json')),
                           const SizedBox(
                             width: 20,
                           ),
-                          Text('Loading...')
+                          const Text('Loading...')
                         ],
                       ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 30, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
                       child: Row(
                         children: [
                           Expanded(
                               child: TextField(
                                   controller: textEditingController,
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
+                                        borderRadius: BorderRadius.circular(100),
                                       ),
                                       fillColor: Colors.transparent,
                                       hintText: "Ask something from AI",
-                                      hintStyle: TextStyle(
-                                          color: Colors.grey.shade300),
+                                      hintStyle: TextStyle(color: Colors.grey.shade300),
                                       filled: true,
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          borderSide: BorderSide(
-                                              color: Colors.white))))),
+                                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: const BorderSide(color: Colors.white))))),
                           const SizedBox(width: 12),
                           InkWell(
                             onTap: () {
                               if (textEditingController.text.isNotEmpty) {
                                 String text = textEditingController.text;
                                 textEditingController.clear();
-                                chatBloc.add(ChatGenerateNewTextMessageEvent(
-                                    inputMessage: text));
+                                chatBloc.add(ChatGenerateNewTextMessageEvent(inputMessage: text));
                               }
                             },
                             child: CircleAvatar(
@@ -147,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: Theme.of(context).primaryColor,
-                                child: Center(
+                                child: const Center(
                                   child: Icon(Icons.send, color: Colors.white),
                                 ),
                               ),
@@ -160,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             default:
-              return SizedBox();
+              return const SizedBox();
           }
         },
       ),

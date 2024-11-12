@@ -16,7 +16,7 @@ class SplashScreenPage extends StatelessWidget {
           )
         ],
       ),
-      nextScreen: HomePage(),
+      nextScreen: const HomePage(),
       splashIconSize: 400,
       backgroundColor: Colors.black,
     );
